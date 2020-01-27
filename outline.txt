@@ -1,0 +1,31 @@
+put App component in provider tag. pass store as props to provider tag
+use createStore(combineReducers<reducers object>) to create store.
+
+identify the states. for each state, create a reducer. Name the reducer
+`${name of state}Reducer`. Each reducer takes the old state as an argument, and an action.
+Return the new state(may be the same as old, or may be modified by received action)
+
+note how the reducers are connected to the store by the createStore function. The 
+isolated functions themselves are not aware of store, but store is aware of them.
+
+actionCreators create actions. they take in identifying pieces of info about the action,
+and returns an object in the ACTION format. The action format consists of a type, and 
+a payload. The type key specifies the type of the action. The wording of the action is
+a VERB(i.e. delete, create, add, update). The syntax is ALL CAPITAL LETTERS. The 
+action creator name is identical to the action type, except in camelCase.
+
+note how the reducers and action creators are both normal js functions which, by themselves,
+have no connection to redux or react.
+
+Each react component may access the store by using the 'connect' import from react-redux.
+the connect function has funny syntax. There are two pairs of parentheses. The first pair
+takes two arguments, the mapStateToProps function and an object of actionCreators.
+The second pair takes in the component to be exported.
+
+The mapStateToProps function takes in a single parameter 'state'. the connect
+function passes this argument to the mapStateToProps function. the mapStateToProps func
+then return an object with the keys as the name of props the component will use, and the
+value is the associateed state.stateName. 
+
+note how the component now has access to props in the store, and it also has access
+to the actionCreators, which gives the ability to update state.
